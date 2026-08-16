@@ -13,17 +13,14 @@ description: >-
 author: Vakho Laluashvili
 lang: en
 
-# >>> CHANGE THESE TWO WHEN YOU CREATE THE GITHUB REPO <<<
-#
 # This is a *project* site, so it is served from a subpath named after the
 # repository: https://<user>.github.io/<repo>/. `baseurl` must be that subpath
 # with a leading slash and no trailing slash, or every link and asset 404s.
-# The MkDocs site already occupies the `JLPT` repo, so this one needs its own
-# name - change both lines to match whatever you call it.
+# If the repository is ever renamed, these three lines have to follow it.
 url: https://vakho10.github.io
-baseurl: /JLPT-Jekyll
+baseurl: /jlpt-kanji
 
-repository: vakho10/JLPT-Jekyll
+repository: vakho10/jlpt-kanji
 mkdocs_site_url: https://vakho10.github.io/JLPT/
 
 # --- build -----------------------------------------------------------------

@@ -5,7 +5,7 @@ a renamed page ships silently. This walks _site/, resolves every internal href
 and src against the output tree, and fails if anything is missing.
 
     python scripts/check_links.py            # after `bundle exec jekyll build`
-    python scripts/check_links.py --site _site --base /JLPT-Jekyll
+    python scripts/check_links.py --site _site --base /jlpt-kanji
 
 Exit code 0 = every link resolves, 1 = something is broken.
 """
@@ -43,7 +43,10 @@ class Refs(HTMLParser):
 def load_baseurl(site_root: Path) -> str:
     config = ROOT / "_config.yml"
     if config.exists():
-        match = re.search(r"^baseurl:\s*(.+)$", config.read_text(encoding="utf-8"), re.M)
+        # Stop at an inline `#` comment - `baseurl: /jlpt-kanji  # the repo name`
+        # is valid YAML, and swallowing the comment would make every path here
+        # look like it was missing the baseurl.
+        match = re.search(r"^baseurl:\s*([^#\r\n]*)", config.read_text(encoding="utf-8"), re.M)
         if match:
             return match.group(1).strip().strip('"').strip("'")
     return ""

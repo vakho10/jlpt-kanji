@@ -20,21 +20,25 @@ bundle install
 bundle exec jekyll serve
 ```
 
-Then open <http://127.0.0.1:4000/JLPT-Jekyll/> — note the `baseurl` path.
+Then open <http://127.0.0.1:4000/jlpt-kanji/> — note the `baseurl` path.
 
-## Set your repository name before deploying
+## The repository name is part of every URL
 
-This is a GitHub *project* site, served from `https://<user>.github.io/<repo>/`.
-Two lines in [`_config.yml`](_config.yml) must match the repository name, or
-every link and asset 404s once deployed:
+This is a GitHub *project* site, served from `https://<user>.github.io/<repo>/`
+— here <https://vakho10.github.io/jlpt-kanji/>. Three lines in
+[`_config.yml`](_config.yml) must match the repository name, or every link and
+asset 404s once deployed:
 
 ```yaml
 url: https://vakho10.github.io
-baseurl: /JLPT-Jekyll        # <- the repository name, leading slash, no trailing slash
+baseurl: /jlpt-kanji         # <- the repository name, leading slash, no trailing slash
+repository: vakho10/jlpt-kanji
 ```
 
-The MkDocs site already owns the `JLPT` repository, so this one needs a
-different name.
+Rename the repository and these have to be updated in the same commit.
+Templates never hardcode the prefix — every internal link goes through
+`relative_url` and the search index stores baseurl-free paths — so `_config.yml`
+is the only place that needs changing.
 
 ## Where the content comes from
 
