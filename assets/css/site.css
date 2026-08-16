@@ -9,25 +9,25 @@
    --------------------------------------------------------------------------- */
 
 :root {
-  /* Japanese falls back to whatever the reader's OS ships, which avoids pulling
-     a multi-megabyte CJK webfont. Mincho (serif) for display glyphs, Gothic for
-     running text. */
-  --jp-serif: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "MS PMincho",
+    /* Japanese falls back to whatever the reader's OS ships, which avoids pulling
+       a multi-megabyte CJK webfont. Mincho (serif) for display glyphs, Gothic for
+       running text. */
+    --jp-serif: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "MS PMincho",
     "Noto Serif JP", "Songti SC", serif;
-  --jp-sans: "Hiragino Sans", "Yu Gothic", "YuGothic", "Meiryo",
+    --jp-sans: "Hiragino Sans", "Yu Gothic", "YuGothic", "Meiryo",
     "Noto Sans JP", sans-serif;
 }
 
 :lang(ja) {
-  font-family: var(--jp-sans);
-  /* Proportional kana spacing makes short Japanese strings look ragged next to
-     Latin text; keep the monospaced advance widths. */
-  font-feature-settings: "palt" 0;
+    font-family: var(--jp-sans);
+    /* Proportional kana spacing makes short Japanese strings look ragged next to
+       Latin text; keep the monospaced advance widths. */
+    font-feature-settings: "palt" 0;
 }
 
 .jp-serif,
 :lang(ja).jp-serif {
-  font-family: var(--jp-serif);
+    font-family: var(--jp-serif);
 }
 
 /* --- stroke-order diagram -------------------------------------------------
@@ -35,31 +35,31 @@
    classes cannot style elements inside it. */
 
 .stroke-diagram svg {
-  display: block;
-  width: 100%;
-  max-width: 15rem;
-  height: auto;
-  margin-inline: auto;
+    display: block;
+    width: 100%;
+    max-width: 15rem;
+    height: auto;
+    margin-inline: auto;
 }
 
 .stroke-diagram svg path {
-  stroke: var(--bs-emphasis-color);
-  stroke-width: 3;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+    stroke: var(--bs-emphasis-color);
+    stroke-width: 3;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 /* KanjiVG's own numbering group. Bootstrap's default primary, with the page
    background as a halo so a number sitting on a stroke stays legible. */
 .stroke-diagram .stroke-numbers text {
-  font-family: var(--bs-body-font-family);
-  font-size: 8px;
-  font-weight: 700;
-  fill: var(--bs-primary);
-  stroke: var(--bs-body-bg);
-  stroke-width: 2;
-  paint-order: stroke fill;
+    font-family: var(--bs-body-font-family);
+    font-size: 8px;
+    font-weight: 700;
+    fill: var(--bs-primary);
+    stroke: var(--bs-body-bg);
+    stroke-width: 2;
+    paint-order: stroke fill;
 }
 
 /* --- kanji grid -----------------------------------------------------------
@@ -69,16 +69,16 @@
    continuously instead of stepping at breakpoints. */
 
 .kanji-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
-  gap: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+    gap: 0.5rem;
 }
 
 @media (max-width: 575.98px) {
-  .kanji-grid {
-    grid-template-columns: repeat(auto-fill, minmax(4.75rem, 1fr));
-    gap: 0.4rem;
-  }
+    .kanji-grid {
+        grid-template-columns: repeat(auto-fill, minmax(4.75rem, 1fr));
+        gap: 0.4rem;
+    }
 }
 
 /* --- visited kanji --------------------------------------------------------
@@ -99,8 +99,8 @@
    shows the hover border. Hover sets no background, so the tint stays. */
 
 .kanji-grid a:visited {
-  background-color: var(--bs-success-bg-subtle);
-  border-color: var(--bs-success-border-subtle);
+    background-color: var(--bs-success-bg-subtle);
+    border-color: var(--bs-success-border-subtle);
 }
 
 /* --- card hover -----------------------------------------------------------
@@ -113,8 +113,7 @@
    focus, so a keyboard user would otherwise get no feedback at all. */
 
 .card-hover {
-  transition:
-    transform 0.15s ease-in-out,
+    transition: transform 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out,
     border-color 0.15s ease-in-out;
 }
@@ -122,23 +121,23 @@
 .card-hover:hover,
 .card-hover:focus-visible,
 .card-hover:focus-within {
-  transform: translateY(-2px);
-  border-color: var(--bs-primary);
-  /* !important only to outrank Bootstrap's .shadow-sm utility, which is itself
-     !important and would otherwise pin the resting shadow through the hover. */
-  box-shadow: var(--bs-box-shadow) !important;
+    transform: translateY(-2px);
+    border-color: var(--bs-primary);
+    /* !important only to outrank Bootstrap's .shadow-sm utility, which is itself
+       !important and would otherwise pin the resting shadow through the hover. */
+    box-shadow: var(--bs-box-shadow) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card-hover {
-    transition: none;
-  }
+    .card-hover {
+        transition: none;
+    }
 
-  .card-hover:hover,
-  .card-hover:focus-visible,
-  .card-hover:focus-within {
-    transform: none;
-  }
+    .card-hover:hover,
+    .card-hover:focus-visible,
+    .card-hover:focus-within {
+        transform: none;
+    }
 }
 
 /* --- two-line clamp -------------------------------------------------------
@@ -146,9 +145,9 @@
    whole row taller than the rest, which is very visible across 1,249 cards. */
 
 .clamp-2 {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
 }

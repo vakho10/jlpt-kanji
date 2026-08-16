@@ -6,8 +6,8 @@ styling is fully under our control rather than a theme's.
 
 All **2,284** kanji are covered:
 
-| N5 | N4 | N3 | N2 | N1 | total |
-| -: | -: | -: | -: | -: | ----: |
+| N5 |  N4 |  N3 |  N2 |    N1 | total |
+|---:|----:|----:|----:|------:|------:|
 | 79 | 167 | 416 | 373 | 1,249 | 2,284 |
 
 This is a sibling of the [MkDocs project](../MKDocs), which holds the kanji data
@@ -87,13 +87,13 @@ Hiragana and katakana are folded together, and Hepburn macrons are folded so
 
 ## Commands
 
-| Command | What it does |
-| --- | --- |
-| `bundle exec jekyll serve` | Live-reloading dev server |
-| `bundle exec jekyll build` | Build into `_site/` (~15s for 2,290 pages) |
-| `python scripts/check_links.py` | Verify every internal link resolves — Jekyll has no `--strict` |
-| `python scripts/sync_from_mkdocs.py` | Regenerate content from the MkDocs data |
-| `python scripts/port_about_pages.py` | One-off: re-import the About pages |
+| Command                              | What it does                                                   |
+|--------------------------------------|----------------------------------------------------------------|
+| `bundle exec jekyll serve`           | Live-reloading dev server                                      |
+| `bundle exec jekyll build`           | Build into `_site/` (~15s for 2,290 pages)                     |
+| `python scripts/check_links.py`      | Verify every internal link resolves — Jekyll has no `--strict` |
+| `python scripts/sync_from_mkdocs.py` | Regenerate content from the MkDocs data                        |
+| `python scripts/port_about_pages.py` | One-off: re-import the About pages                             |
 
 ## Deployment
 
@@ -138,14 +138,14 @@ The palette is deliberately narrow, so nothing looks improvised:
 [`assets/css/site.css`](assets/css/site.css) is **154 lines**, and holds only the
 six things Bootstrap has no utility for:
 
-| Rule | Why it cannot be a utility class |
-| --- | --- |
-| `:lang(ja)`, `.jp-serif` | CJK font stacks; also disables `palt` so kana keep monospaced advances |
-| `.stroke-diagram svg …` | styles elements *inside* the inlined KanjiVG SVG, which utilities cannot reach |
-| `.kanji-grid` | `row-cols-*` caps at 6 columns; N1's 1,249 cards are 29 screens at 6 across against 18.6 at 10 |
-| `.card-hover` | Bootstrap gives cards no hover state, so a clickable card looks identical to a static one |
-| `.kanji-grid a:visited` | Bootstrap ships no `:visited` rule at all, and browsers allow only colour properties here |
-| `.clamp-2` | Bootstrap has no line-clamp utility, and one long gloss otherwise makes its whole row taller |
+| Rule                     | Why it cannot be a utility class                                                               |
+|--------------------------|------------------------------------------------------------------------------------------------|
+| `:lang(ja)`, `.jp-serif` | CJK font stacks; also disables `palt` so kana keep monospaced advances                         |
+| `.stroke-diagram svg …`  | styles elements *inside* the inlined KanjiVG SVG, which utilities cannot reach                 |
+| `.kanji-grid`            | `row-cols-*` caps at 6 columns; N1's 1,249 cards are 29 screens at 6 across against 18.6 at 10 |
+| `.card-hover`            | Bootstrap gives cards no hover state, so a clickable card looks identical to a static one      |
+| `.kanji-grid a:visited`  | Bootstrap ships no `:visited` rule at all, and browsers allow only colour properties here      |
+| `.clamp-2`               | Bootstrap has no line-clamp utility, and one long gloss otherwise makes its whole row taller   |
 
 Kanji already opened are tinted with `--bs-success-bg-subtle` via `:visited`.
 Browsers restrict `:visited` to a short list of colour properties — colour,

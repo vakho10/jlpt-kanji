@@ -1,47 +1,48 @@
 <footer class="mt-auto py-4 border-top">
-  <div class="container">
-    <div class="row g-4">
+    <div class="container">
+        <div class="row g-4">
 
-      <div class="col-12 col-md-5">
-        <p class="fw-semibold mb-1">JLPT Kanji</p>
-        <p class="text-body-secondary mb-2">
-          All 2,284 kanji from the JLPT reference lists, N5 through N1, built for N2.
-        </p>
-        <p class="text-body-secondary mb-0">
-          Not affiliated with the JLPT, which is administered by the
-          <a href="https://www.jlpt.jp/" rel="noopener">Japan Foundation <i class="fa-solid fa-arrow-up-right-from-square fa-xs" aria-hidden="true"></i></a> and JEES.
-        </p>
-      </div>
+            <div class="col-12 col-md-5">
+                <p class="fw-semibold mb-1">JLPT Kanji</p>
+                <p class="text-body-secondary mb-2">
+                    All 2,284 kanji from the JLPT reference lists, N5 through N1, built for N2.
+                </p>
+                <p class="text-body-secondary mb-0">
+                    Not affiliated with the JLPT, which is administered by the
+                    <a href="https://www.jlpt.jp/" rel="noopener">Japan Foundation <i
+                            class="fa-solid fa-arrow-up-right-from-square fa-xs" aria-hidden="true"></i></a> and JEES.
+                </p>
+            </div>
 
-      <div class="col-6 col-md-3">
-        <p class="fw-semibold mb-1">Levels</p>
-        <ul class="list-unstyled mb-0">
-          {%- assign levels = site.data.levels.levels | sort: "order" -%}
-          {%- for level in levels -%}
-            <li>
-              <a class="link-body-emphasis text-decoration-none"
-                 href="{{ level.id | prepend: '/' | append: '/' | relative_url }}">
-                {{ level.name }} <span class="text-body-secondary">· {{ level.count }}</span>
-              </a>
-            </li>
-          {%- endfor -%}
-        </ul>
-      </div>
+            <div class="col-6 col-md-3">
+                <p class="fw-semibold mb-1">Levels</p>
+                <ul class="list-unstyled mb-0">
+                    {%- assign levels = site.data.levels.levels | sort: "order" -%}
+                    {%- for level in levels -%}
+                    <li>
+                        <a class="link-body-emphasis text-decoration-none"
+                           href="{{ level.id | prepend: '/' | append: '/' | relative_url }}">
+                            {{ level.name }} <span class="text-body-secondary">· {{ level.count }}</span>
+                        </a>
+                    </li>
+                    {%- endfor -%}
+                </ul>
+            </div>
 
-      <div class="col-6 col-md-4">
-        <p class="fw-semibold mb-1">Data</p>
-        <ul class="list-unstyled mb-0 text-body-secondary">
-          <li>KANJIDIC2 &amp; JMdict — EDRDG, CC BY-SA 4.0</li>
-          <li>Tanaka corpus — Tatoeba, CC BY 2.0 FR</li>
-          <li>KanjiVG — CC BY-SA 3.0</li>
-          <li class="mt-1">
-            <a class="link-body-emphasis" href="{{ '/about/credits/' | relative_url }}">Full credits</a>
-            ·
-            <a class="link-body-emphasis" href="{{ '/about/sources/' | relative_url }}">Sources</a>
-          </li>
-        </ul>
-      </div>
+            <div class="col-6 col-md-4">
+                <p class="fw-semibold mb-1">Data</p>
+                <ul class="list-unstyled mb-0 text-body-secondary">
+                    <li>KANJIDIC2 &amp; JMdict — EDRDG, CC BY-SA 4.0</li>
+                    <li>Tanaka corpus — Tatoeba, CC BY 2.0 FR</li>
+                    <li>KanjiVG — CC BY-SA 3.0</li>
+                    <li class="mt-1">
+                        <a class="link-body-emphasis" href="{{ '/about/credits/' | relative_url }}">Full credits</a>
+                        ·
+                        <a class="link-body-emphasis" href="{{ '/about/sources/' | relative_url }}">Sources</a>
+                    </li>
+                </ul>
+            </div>
 
+        </div>
     </div>
-  </div>
 </footer>

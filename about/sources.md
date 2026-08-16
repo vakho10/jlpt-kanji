@@ -15,7 +15,7 @@ Which kanji belong to which JLPT level is taken from two public references:
 They hold different numbers of kanji:
 
 | Level | kanji.jepang.org | kanjilibrary.com | Only on jepang |
-| :---- | ---------------: | ---------------: | -------------: |
+|:------|-----------------:|-----------------:|---------------:|
 | N5    |               79 |               79 |              — |
 | N4    |              167 |              166 |              1 |
 | N3    |              416 |              367 |             49 |

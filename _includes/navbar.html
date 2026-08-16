@@ -1,44 +1,44 @@
 <nav class="navbar navbar-expand-lg sticky-top bg-body border-bottom">
-  <div class="container">
-    <a class="navbar-brand d-flex align-items-center gap-2" href="{{ '/' | relative_url }}">
-      <span class="fs-3 lh-1 jp-serif" aria-hidden="true">字</span>
-      <span class="fw-semibold">JLPT Kanji</span>
-    </a>
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="{{ '/' | relative_url }}">
+            <span class="fs-3 lh-1 jp-serif" aria-hidden="true">字</span>
+            <span class="fw-semibold">JLPT Kanji</span>
+        </a>
 
-    {%- comment -%}
-      Search sits OUTSIDE the collapse. Inside it, it is display:none on a phone
-      until the hamburger is opened, and it is the main way into 2,284 pages.
-    {%- endcomment -%}
-    <div class="d-flex align-items-center gap-2 order-lg-last ms-auto ms-lg-3">
-      <button class="btn btn-outline-primary d-inline-flex align-items-center justify-content-center gap-2"
-              type="button" data-bs-toggle="modal" data-bs-target="#searchModal"
-              aria-label="Search kanji">
-        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-        <span>Search</span>
-      </button>
+        {%- comment -%}
+        Search sits OUTSIDE the collapse. Inside it, it is display:none on a phone
+        until the hamburger is opened, and it is the main way into 2,284 pages.
+        {%- endcomment -%}
+        <div class="d-flex align-items-center gap-2 order-lg-last ms-auto ms-lg-3">
+            <button class="btn btn-outline-primary d-inline-flex align-items-center justify-content-center gap-2"
+                    type="button" data-bs-toggle="modal" data-bs-target="#searchModal"
+                    aria-label="Search kanji">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                <span>Search</span>
+            </button>
 
-      <button class="navbar-toggler border-0 p-2" type="button" data-bs-toggle="collapse"
-              data-bs-target="#mainNav" aria-controls="mainNav"
-              aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fa-solid fa-bars fs-5" aria-hidden="true"></i>
-      </button>
+            <button class="navbar-toggler border-0 p-2" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#mainNav" aria-controls="mainNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars fs-5" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {%- assign levels = site.data.levels.levels | sort: "order" -%}
+                {%- for level in levels -%}
+                <li class="nav-item">
+                    <a class="nav-link{% if page.level_id == level.id %} active{% endif %}"
+                       {% if page.level_id== level.id %}aria-current="page" {% endif %}
+                       href="{{ level.id | prepend: '/' | append: '/' | relative_url }}">{{ level.name }}</a>
+                </li>
+                {%- endfor -%}
+                <li class="nav-item">
+                    <a class="nav-link{% if page.url contains '/about/' %} active{% endif %}"
+                       href="{{ '/about/' | relative_url }}">About</a>
+                </li>
+            </ul>
+        </div>
     </div>
-
-    <div class="collapse navbar-collapse" id="mainNav">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        {%- assign levels = site.data.levels.levels | sort: "order" -%}
-        {%- for level in levels -%}
-          <li class="nav-item">
-            <a class="nav-link{% if page.level_id == level.id %} active{% endif %}"
-               {% if page.level_id == level.id %}aria-current="page"{% endif %}
-               href="{{ level.id | prepend: '/' | append: '/' | relative_url }}">{{ level.name }}</a>
-          </li>
-        {%- endfor -%}
-        <li class="nav-item">
-          <a class="nav-link{% if page.url contains '/about/' %} active{% endif %}"
-             href="{{ '/about/' | relative_url }}">About</a>
-        </li>
-      </ul>
-    </div>
-  </div>
 </nav>

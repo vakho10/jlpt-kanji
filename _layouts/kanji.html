@@ -3,184 +3,189 @@ layout: default
 ---
 <div class="container py-4">
 
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ '/' | relative_url }}"><i class="fa-solid fa-house me-1" aria-hidden="true"></i>Home</a></li>
-      <li class="breadcrumb-item">
-        <a href="{{ page.level_id | prepend: '/' | append: '/' | relative_url }}">{{ page.level }}</a>
-      </li>
-      <li class="breadcrumb-item active" aria-current="page">{{ page.char }}</li>
-    </ol>
-  </nav>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ '/' | relative_url }}"><i class="fa-solid fa-house me-1"
+                                                                              aria-hidden="true"></i>Home</a></li>
+            <li class="breadcrumb-item">
+                <a href="{{ page.level_id | prepend: '/' | append: '/' | relative_url }}">{{ page.level }}</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">{{ page.char }}</li>
+        </ol>
+    </nav>
 
-  <!-- hero -->
-  <div class="card mb-4">
-    <div class="card-body d-flex flex-wrap align-items-center gap-4">
-      <h1 class="display-1 fw-normal lh-1 mb-0 jp-serif" lang="ja">{{ page.char }}</h1>
+    <!-- hero -->
+    <div class="card mb-4">
+        <div class="card-body d-flex flex-wrap align-items-center gap-4">
+            <h1 class="display-1 fw-normal lh-1 mb-0 jp-serif" lang="ja">{{ page.char }}</h1>
 
-      <div class="flex-grow-1" style="min-width: 15rem;">
-        <p class="lead mb-3">{{ page.meanings | join: ", " }}</p>
+            <div class="flex-grow-1" style="min-width: 15rem;">
+                <p class="lead mb-3">{{ page.meanings | join: ", " }}</p>
 
-        <dl class="row row-cols-2 row-cols-sm-3 row-cols-lg-5 g-3 mb-0">
-          <div class="col">
-            <dt class="text-body-secondary fw-normal">Level</dt>
-            <dd class="mb-0"><span class="badge text-bg-primary">{{ page.level }}</span></dd>
-          </div>
-          <div class="col">
-            <dt class="text-body-secondary fw-normal">Strokes</dt>
-            <dd class="mb-0">{{ page.strokes }}</dd>
-          </div>
-          <div class="col">
-            <dt class="text-body-secondary fw-normal">Radical</dt>
-            <dd class="mb-0">
-              <span lang="ja">{{ page.radical.char }}</span>
-              <span class="d-block text-body-secondary">{{ page.radical.meaning }}</span>
-            </dd>
-          </div>
-          <div class="col">
-            <dt class="text-body-secondary fw-normal">Grade</dt>
-            <dd class="mb-0">
-              {%- if page.grade == nil -%}not taught in school
-              {%- elsif page.grade >= 8 -%}secondary school
-              {%- else -%}grade {{ page.grade }}
-              {%- endif -%}
-            </dd>
-          </div>
-          <div class="col">
-            <dt class="text-body-secondary fw-normal">Frequency</dt>
-            <dd class="mb-0">
-              {%- if page.freq -%}#{{ page.freq }} most common
-              {%- else -%}outside the top 2500
-              {%- endif -%}
-            </dd>
-          </div>
-        </dl>
-      </div>
-    </div>
-  </div>
-
-  {%- if page.level_note %}
-  <div class="alert alert-warning" role="note">
-    <i class="fa-solid fa-triangle-exclamation me-2" aria-hidden="true"></i><strong>Note</strong> — {{ page.level_note }}
-  </div>
-  {%- endif %}
-
-  <div class="row g-4">
-
-    <!-- readings -->
-    <div class="col-12 col-lg-7">
-      <h2 class="h4 pb-2 border-bottom"><i class="fa-solid fa-language text-body-secondary me-2" aria-hidden="true"></i>Readings</h2>
-      <div class="row g-3">
-        {%- assign groups = "onyomi,kunyomi" | split: "," -%}
-        {%- for group in groups -%}
-          {%- if group == "onyomi" -%}
-            {%- assign entries = page.onyomi -%}
-            {%- assign heading = "On'yomi" -%}
-            {%- assign hint = "Borrowed from Chinese. Written in katakana. Dominant inside compounds." -%}
-          {%- else -%}
-            {%- assign entries = page.kunyomi -%}
-            {%- assign heading = "Kun'yomi" -%}
-            {%- assign hint = "Native Japanese. Written in hiragana. Usual when the kanji stands alone." -%}
-          {%- endif -%}
-          <div class="col-12 col-md-6">
-            <div class="card h-100">
-              <div class="card-body">
-                <h3 class="card-title h6">{{ heading }}</h3>
-                <p class="card-text text-body-secondary">{{ hint }}</p>
-                {%- if entries and entries.size > 0 %}
-                  <ul class="list-unstyled d-flex flex-wrap gap-2 mb-0">
-                    {%- for r in entries %}
-                      <li class="border rounded-pill px-3 py-1{% if r.rare %} text-body-secondary{% endif %}">
-                        <span lang="ja">{{ r.kana }}</span>
-                        <span class="text-body-secondary">{{ r.romaji }}</span>
-                        {%- if r.rare %} <span class="badge text-bg-secondary">rare</span>{% endif %}
-                      </li>
-                    {%- endfor %}
-                  </ul>
-                {%- else %}
-                  <p class="text-body-secondary mb-0">none in common use</p>
-                {%- endif %}
-              </div>
+                <dl class="row row-cols-2 row-cols-sm-3 row-cols-lg-5 g-3 mb-0">
+                    <div class="col">
+                        <dt class="text-body-secondary fw-normal">Level</dt>
+                        <dd class="mb-0"><span class="badge text-bg-primary">{{ page.level }}</span></dd>
+                    </div>
+                    <div class="col">
+                        <dt class="text-body-secondary fw-normal">Strokes</dt>
+                        <dd class="mb-0">{{ page.strokes }}</dd>
+                    </div>
+                    <div class="col">
+                        <dt class="text-body-secondary fw-normal">Radical</dt>
+                        <dd class="mb-0">
+                            <span lang="ja">{{ page.radical.char }}</span>
+                            <span class="d-block text-body-secondary">{{ page.radical.meaning }}</span>
+                        </dd>
+                    </div>
+                    <div class="col">
+                        <dt class="text-body-secondary fw-normal">Grade</dt>
+                        <dd class="mb-0">
+                            {%- if page.grade == nil -%}not taught in school
+                            {%- elsif page.grade >= 8 -%}secondary school
+                            {%- else -%}grade {{ page.grade }}
+                            {%- endif -%}
+                        </dd>
+                    </div>
+                    <div class="col">
+                        <dt class="text-body-secondary fw-normal">Frequency</dt>
+                        <dd class="mb-0">
+                            {%- if page.freq -%}#{{ page.freq }} most common
+                            {%- else -%}outside the top 2500
+                            {%- endif -%}
+                        </dd>
+                    </div>
+                </dl>
             </div>
-          </div>
-        {%- endfor -%}
-      </div>
-    </div>
-
-    <!-- stroke order -->
-    <div class="col-12 col-lg-5">
-      <h2 class="h4 pb-2 border-bottom"><i class="fa-solid fa-pen-nib text-body-secondary me-2" aria-hidden="true"></i>Stroke order</h2>
-      {%- if page.has_stroke %}
-        <p class="text-body-secondary">Numbers mark where each stroke begins. Draw in the order shown.</p>
-        <div class="card">
-          <div class="card-body stroke-diagram">
-            {{ content }}
-          </div>
         </div>
-      {%- else %}
-        <p class="text-body-secondary">No stroke-order diagram is available for this kanji yet.</p>
-      {%- endif %}
     </div>
-  </div>
 
-  <!-- common words -->
-  <h2 class="h4 pb-2 border-bottom mt-4"><i class="fa-solid fa-book-open text-body-secondary me-2" aria-hidden="true"></i>Common words</h2>
-  {%- if page.words and page.words.size > 0 %}
+    {%- if page.level_note %}
+    <div class="alert alert-warning" role="note">
+        <i class="fa-solid fa-triangle-exclamation me-2" aria-hidden="true"></i><strong>Note</strong> — {{
+        page.level_note }}
+    </div>
+    {%- endif %}
+
+    <div class="row g-4">
+
+        <!-- readings -->
+        <div class="col-12 col-lg-7">
+            <h2 class="h4 pb-2 border-bottom"><i class="fa-solid fa-language text-body-secondary me-2"
+                                                 aria-hidden="true"></i>Readings</h2>
+            <div class="row g-3">
+                {%- assign groups = "onyomi,kunyomi" | split: "," -%}
+                {%- for group in groups -%}
+                {%- if group == "onyomi" -%}
+                {%- assign entries = page.onyomi -%}
+                {%- assign heading = "On'yomi" -%}
+                {%- assign hint = "Borrowed from Chinese. Written in katakana. Dominant inside compounds." -%}
+                {%- else -%}
+                {%- assign entries = page.kunyomi -%}
+                {%- assign heading = "Kun'yomi" -%}
+                {%- assign hint = "Native Japanese. Written in hiragana. Usual when the kanji stands alone." -%}
+                {%- endif -%}
+                <div class="col-12 col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title h6">{{ heading }}</h3>
+                            <p class="card-text text-body-secondary">{{ hint }}</p>
+                            {%- if entries and entries.size > 0 %}
+                            <ul class="list-unstyled d-flex flex-wrap gap-2 mb-0">
+                                {%- for r in entries %}
+                                <li class="border rounded-pill px-3 py-1{% if r.rare %} text-body-secondary{% endif %}">
+                                    <span lang="ja">{{ r.kana }}</span>
+                                    <span class="text-body-secondary">{{ r.romaji }}</span>
+                                    {%- if r.rare %} <span class="badge text-bg-secondary">rare</span>{% endif %}
+                                </li>
+                                {%- endfor %}
+                            </ul>
+                            {%- else %}
+                            <p class="text-body-secondary mb-0">none in common use</p>
+                            {%- endif %}
+                        </div>
+                    </div>
+                </div>
+                {%- endfor -%}
+            </div>
+        </div>
+
+        <!-- stroke order -->
+        <div class="col-12 col-lg-5">
+            <h2 class="h4 pb-2 border-bottom"><i class="fa-solid fa-pen-nib text-body-secondary me-2"
+                                                 aria-hidden="true"></i>Stroke order</h2>
+            {%- if page.has_stroke %}
+            <p class="text-body-secondary">Numbers mark where each stroke begins. Draw in the order shown.</p>
+            <div class="card">
+                <div class="card-body stroke-diagram">
+                    {{ content }}
+                </div>
+            </div>
+            {%- else %}
+            <p class="text-body-secondary">No stroke-order diagram is available for this kanji yet.</p>
+            {%- endif %}
+        </div>
+    </div>
+
+    <!-- common words -->
+    <h2 class="h4 pb-2 border-bottom mt-4"><i class="fa-solid fa-book-open text-body-secondary me-2"
+                                              aria-hidden="true"></i>Common words</h2>
+    {%- if page.words and page.words.size > 0 %}
     <p class="text-body-secondary">Read the compound as one unit, not two characters.</p>
     <ul class="list-group mb-4">
-      {%- for w in page.words %}
+        {%- for w in page.words %}
         <li class="list-group-item d-flex flex-wrap align-items-baseline gap-2 gap-md-3">
-          <span class="fs-5" lang="ja" style="min-width: 4.5rem;">{{ w.word }}</span>
-          <span class="text-body-secondary" lang="ja">{{ w.reading }}</span>
-          <span class="text-body-secondary fst-italic">{{ w.romaji }}</span>
-          <span class="flex-grow-1">{{ w.gloss }}</span>
-          {%- if w.jlpt %}<span class="badge text-bg-secondary">{{ w.jlpt }}</span>{% endif %}
+            <span class="fs-5" lang="ja" style="min-width: 4.5rem;">{{ w.word }}</span>
+            <span class="text-body-secondary" lang="ja">{{ w.reading }}</span>
+            <span class="text-body-secondary fst-italic">{{ w.romaji }}</span>
+            <span class="flex-grow-1">{{ w.gloss }}</span>
+            {%- if w.jlpt %}<span class="badge text-bg-secondary">{{ w.jlpt }}</span>{% endif %}
         </li>
-      {%- endfor %}
+        {%- endfor %}
     </ul>
-  {%- else %}
+    {%- else %}
     <p class="text-body-secondary">No common vocabulary for this kanji in JMdict yet.</p>
-  {%- endif %}
+    {%- endif %}
 
-  <!-- example sentences -->
-  <h2 class="h4 pb-2 mb-3 border-bottom">
-    <i class="fa-solid fa-quote-left text-body-secondary me-2" aria-hidden="true"></i>Example sentences
-  </h2>
-  {%- if page.sentences and page.sentences.size > 0 %}
-  <ul class="list-group mb-4">
-    {%- for s in page.sentences %}
-      <li class="list-group-item d-flex flex-wrap align-items-baseline gap-2 gap-md-3">
-        <figure>
-          <blockquote class="blockquote mb-1">
-            <p class="mb-0 lh-lg" lang="ja">{{ s.ja }}</p>
-          </blockquote>
-          <figcaption>
-            <span class="d-block small text-body-secondary mb-1" lang="ja">{{ s.reading }}</span>
-            <span class="d-block small text-body-secondary fst-italic mb-2">{{ s.romaji }}</span>
-            <span class="d-block">{{ s.translation }}</span>
-          </figcaption>
-        </figure>
-      </li>
-    {%- endfor %}
-  </ul>
-  {%- else %}
+    <!-- example sentences -->
+    <h2 class="h4 pb-2 mb-3 border-bottom">
+        <i class="fa-solid fa-quote-left text-body-secondary me-2" aria-hidden="true"></i>Example sentences
+    </h2>
+    {%- if page.sentences and page.sentences.size > 0 %}
+    <ul class="list-group mb-4">
+        {%- for s in page.sentences %}
+        <li class="list-group-item d-flex flex-wrap align-items-baseline gap-2 gap-md-3">
+            <figure>
+                <blockquote class="blockquote mb-1">
+                    <p class="mb-0 lh-lg" lang="ja">{{ s.ja }}</p>
+                </blockquote>
+                <figcaption>
+                    <span class="d-block small text-body-secondary mb-1" lang="ja">{{ s.reading }}</span>
+                    <span class="d-block small text-body-secondary fst-italic mb-2">{{ s.romaji }}</span>
+                    <span class="d-block">{{ s.translation }}</span>
+                </figcaption>
+            </figure>
+        </li>
+        {%- endfor %}
+    </ul>
+    {%- else %}
     <p class="text-body-secondary">No example sentence for this kanji in the Tanaka corpus yet.</p>
-  {%- endif %}
+    {%- endif %}
 
-  <!-- pager -->
-  <nav class="d-flex flex-wrap gap-2 align-items-center pt-3 border-top" aria-label="Kanji navigation">
-    {%- if page.prev_url %}
-      <a class="btn btn-outline-primary" href="{{ page.prev_url | relative_url }}">
-        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> <span lang="ja">{{ page.prev_char }}</span>
-      </a>
-    {%- endif %}
-    <a class="btn btn-primary mx-auto"
-       href="{{ page.level_id | prepend: '/' | append: '/' | relative_url }}">All {{ page.level }} kanji</a>
-    {%- if page.next_url %}
-      <a class="btn btn-outline-primary" href="{{ page.next_url | relative_url }}">
-        <span lang="ja">{{ page.next_char }}</span> <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-      </a>
-    {%- endif %}
-  </nav>
+    <!-- pager -->
+    <nav class="d-flex flex-wrap gap-2 align-items-center pt-3 border-top" aria-label="Kanji navigation">
+        {%- if page.prev_url %}
+        <a class="btn btn-outline-primary" href="{{ page.prev_url | relative_url }}">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> <span lang="ja">{{ page.prev_char }}</span>
+        </a>
+        {%- endif %}
+        <a class="btn btn-primary mx-auto"
+           href="{{ page.level_id | prepend: '/' | append: '/' | relative_url }}">All {{ page.level }} kanji</a>
+        {%- if page.next_url %}
+        <a class="btn btn-outline-primary" href="{{ page.next_url | relative_url }}">
+            <span lang="ja">{{ page.next_char }}</span> <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </a>
+        {%- endif %}
+    </nav>
 
 </div>

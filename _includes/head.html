@@ -4,10 +4,10 @@
 <link rel="stylesheet" href="{{ '/assets/vendor/bootstrap/bootstrap.min.css' | relative_url }}">
 
 {%- comment -%}
-  Font Awesome Free, vendored rather than loaded from a CDN so the site has no
-  third-party runtime dependency - the same treatment Bootstrap gets. Only the
-  core and solid stylesheets and the solid webfont are carried; every icon used
-  here is fa-solid.
+Font Awesome Free, vendored rather than loaded from a CDN so the site has no
+third-party runtime dependency - the same treatment Bootstrap gets. Only the
+core and solid stylesheets and the solid webfont are carried; every icon used
+here is fa-solid.
 {%- endcomment -%}
 <link rel="preload" as="font" type="font/woff2" crossorigin
       href="{{ '/assets/vendor/fontawesome/webfonts/fa-solid-900.woff2' | relative_url }}">
@@ -21,8 +21,8 @@
 {% seo %}
 
 {%- comment -%}
-  The search index is a plain JSON file fetched on demand, not on page load, so
-  it costs nothing until the reader actually opens search.
+The search index is a plain JSON file fetched on demand, not on page load, so
+it costs nothing until the reader actually opens search.
 {%- endcomment -%}
 <meta name="jlpt:search-index" content="{{ '/assets/search-index.json' | relative_url }}">
 <meta name="jlpt:baseurl" content="{{ site.baseurl }}">

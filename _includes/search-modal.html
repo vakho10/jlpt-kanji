@@ -1,33 +1,33 @@
 <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-scrollable">
-    <div class="modal-content">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
 
-      <div class="modal-header align-items-center gap-2">
-        <label class="visually-hidden" for="searchInput" id="searchModalLabel">Search kanji</label>
-        <input type="search" class="form-control form-control-lg"
-               id="searchInput" autocomplete="off" spellcheck="false"
-               placeholder="Search a kanji, meaning, reading or word…"
-               aria-describedby="searchHint" aria-controls="searchResults">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
+            <div class="modal-header align-items-center gap-2">
+                <label class="visually-hidden" for="searchInput" id="searchModalLabel">Search kanji</label>
+                <input type="search" class="form-control form-control-lg"
+                       id="searchInput" autocomplete="off" spellcheck="false"
+                       placeholder="Search a kanji, meaning, reading or word…"
+                       aria-describedby="searchHint" aria-controls="searchResults">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
 
-      <div class="modal-body pt-2">
-        <p class="text-body-secondary mb-2" id="searchHint">
-          Try a character (<code>税</code>), a meaning (<code>tax</code>), a reading in
-          kana or romaji (<code>ゼイ</code>, <code>zei</code>) or a word it appears in
-          (<code>税金</code>).
-        </p>
+            <div class="modal-body pt-2">
+                <p class="text-body-secondary mb-2" id="searchHint">
+                    Try a character (<code>税</code>), a meaning (<code>tax</code>), a reading in
+                    kana or romaji (<code>ゼイ</code>, <code>zei</code>) or a word it appears in
+                    (<code>税金</code>).
+                </p>
 
-        <div id="searchStatus" class="text-body-secondary" role="status" aria-live="polite"></div>
+                <div id="searchStatus" class="text-body-secondary" role="status" aria-live="polite"></div>
 
-        {%- comment -%}
-          list-group-item-action supplies the hover and focus states, so no
-          custom CSS is needed for the result rows.
-        {%- endcomment -%}
-        <div class="list-group mt-3" id="searchResults" role="listbox"
-             aria-label="Search results"></div>
-      </div>
+                {%- comment -%}
+                list-group-item-action supplies the hover and focus states, so no
+                custom CSS is needed for the result rows.
+                {%- endcomment -%}
+                <div class="list-group mt-3" id="searchResults" role="listbox"
+                     aria-label="Search results"></div>
+            </div>
 
+        </div>
     </div>
-  </div>
 </div>
