@@ -1,0 +1,90 @@
+---
+layout: default
+---
+{%- assign levels = site.data.levels.levels | sort: "order" -%}
+{%- assign total = 0 -%}
+{%- for level in levels -%}{%- assign total = total | plus: level.count -%}{%- endfor -%}
+
+<div class="container">
+
+  <div class="px-4 py-5 text-center border-bottom">
+    <p class="display-1 lh-1 mb-3 jp-serif" lang="ja" aria-hidden="true">漢字</p>
+    <h1 class="display-5 fw-bold">Every JLPT kanji, N5 through N1</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">
+        All {{ total }} kanji, with the readings, the stroke order, the words you
+        actually meet it in, and sentences that use them.
+      </p>
+      <button class="btn btn-primary btn-lg px-4" type="button"
+              data-bs-toggle="modal" data-bs-target="#searchModal">
+        <i class="fa-solid fa-magnifying-glass me-2" aria-hidden="true"></i>Search a kanji
+      </button>
+    </div>
+  </div>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-5 g-4 py-5">
+    {%- for level in levels %}
+      <div class="col">
+        <div class="card h-100 shadow-sm card-hover">
+          <div class="card-body">
+            <h2 class="card-title h4">{{ level.name }}</h2>
+            <h3 class="card-subtitle mb-2 text-body-secondary h6">{{ level.count }} kanji</h3>
+            <p class="card-text">{{ level.tagline }}</p>
+          </div>
+          <div class="card-footer">
+            <a class="stretched-link"
+               href="{{ level.id | prepend: '/' | append: '/' | relative_url }}">Browse {{ level.name }}
+               <i class="fa-solid fa-chevron-right fa-xs ms-1" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    {%- endfor %}
+  </div>
+
+  <div class="row g-4 pb-5 border-bottom">
+    <div class="col-12">
+      <h2 class="h4 mb-4">What every kanji page gives you</h2>
+    </div>
+    {%- comment -%} Icons match the section headings on a kanji page. {%- endcomment -%}
+    {%- assign features = "language|Both readings|On'yomi and kun'yomi separated, in the right script, with Hepburn romaji.;;pen-nib|Numbered stroke order|The real KanjiVG diagram, numbered at each stroke's starting point.;;book-open|Words it appears in|The common vocabulary, because a reading learned inside a word sticks.;;quote-left|Example sentences|With kana and romaji, kept at or below the kanji's own level." | split: ";;" -%}
+    {%- for feature in features -%}
+      {%- assign parts = feature | split: "|" -%}
+      <div class="col-12 col-sm-6 col-lg-3">
+        <p class="fs-2 text-primary mb-2" aria-hidden="true"><i class="fa-solid fa-{{ parts[0] }}"></i></p>
+        <h3 class="fs-5">{{ parts[1] }}</h3>
+        <p class="text-body-secondary mb-0">{{ parts[2] }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  <div class="row py-5">
+    <div class="col-12">
+      <h2 class="h4">How to use it</h2>
+      <p>
+        Start from a level page. It lists that level's kanji <strong>ordered by how often they
+        appear in print</strong>, which is the order worth learning them in — the first fifty
+        kanji of any level do far more work than the last fifty.
+      </p>
+      <p>
+        On a kanji page, read the <strong>common words</strong> before the readings. A reading
+        learned on its own tends not to stick; a reading learned inside a word you will meet does.
+      </p>
+
+      <h2 class="h4 mt-4">Where the data comes from</h2>
+      <p>
+        Readings, radicals and frequency ranks come from <strong>KANJIDIC2</strong>, vocabulary from
+        <strong>JMdict</strong>, example sentences from the <strong>Tanaka corpus</strong>, and
+        stroke order from <strong>KanjiVG</strong>. Level membership is cross-checked against two
+        public reference lists.
+      </p>
+      <p class="mb-0">
+        There has been no official JLPT kanji list since 2010, so every list is a reconstruction.
+        The two used here differ only by <em>omission</em> — one carries 73 kanji the other leaves
+        out — and never place the same kanji at different levels. See
+        <a href="{{ '/about/sources/' | relative_url }}">Sources</a> for the numbers and
+        <a href="{{ '/about/credits/' | relative_url }}">Credits</a> for licensing.
+      </p>
+    </div>
+  </div>
+
+</div>

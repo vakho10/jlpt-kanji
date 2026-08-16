@@ -1,0 +1,23 @@
+# Normalise line endings so a Windows checkout and the Linux CI build agree.
+* text=auto eol=lf
+
+*.html  text eol=lf
+*.css   text eol=lf
+*.js    text eol=lf
+*.json  text eol=lf
+*.svg   text eol=lf
+*.yml   text eol=lf
+*.md    text eol=lf
+*.py    text eol=lf
+Gemfile      text eol=lf
+Gemfile.lock text eol=lf
+
+*.png   binary
+*.jpg   binary
+*.ico   binary
+
+# The kanji documents and the search index are mostly non-ASCII; tell git to
+# diff them as text rather than guessing "binary".
+*.html  diff
+*.json  diff
+*.md    diff

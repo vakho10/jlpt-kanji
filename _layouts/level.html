@@ -1,0 +1,71 @@
+---
+layout: default
+---
+{%- assign level = site.data.levels.levels | where: "id", page.level_id | first -%}
+{%- assign kanji = site.kanji | where: "level_id", page.level_id | sort: "sort_index" -%}
+
+<div class="container py-4">
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ '/' | relative_url }}"><i class="fa-solid fa-house me-1" aria-hidden="true"></i>Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ level.name }}</li>
+    </ol>
+  </nav>
+
+  <h1>{{ level.title }}</h1>
+  <p class="lead">{{ level.tagline }}</p>
+  <p class="text-body-secondary" style="max-width: 46rem;">{{ level.intro }}</p>
+
+  <div class="d-flex flex-wrap align-items-baseline gap-2 mt-4">
+    <h2 class="h4 mb-0">All {{ kanji.size }} kanji at this level</h2>
+    <span class="text-body-secondary">ordered by how often they appear in print</span>
+  </div>
+
+  {%- comment -%}
+    The tint comes from :visited, so it is the browser's own history - it clears
+    when history clears and does not follow the reader to another device. Worth
+    saying plainly rather than implying the site is tracking progress.
+  {%- endcomment -%}
+  <p class="small text-body-secondary mt-2 mb-3">
+    <span class="d-inline-block border rounded align-text-bottom me-1"
+          style="width:.85rem;height:.85rem;background-color:var(--bs-success-bg-subtle);border-color:var(--bs-success-border-subtle)!important;"
+          aria-hidden="true"></span>
+    Kanji you have already opened are tinted, using your browser's own history.
+  </p>
+
+  {%- comment -%}
+    .kanji-grid, not row-cols: Bootstrap's row-cols utilities cap at 6 columns,
+    which turns N1's 1,249 cards into 29 screens of scrolling. See site.css.
+  {%- endcomment -%}
+  <div class="kanji-grid mb-4">
+    {%- for k in kanji %}
+      <a class="card h-100 text-center text-decoration-none text-body px-1 py-2 card-hover"
+         href="{{ k.url | relative_url }}">
+        <span class="fs-3 lh-1 jp-serif" lang="ja">{{ k.char }}</span>
+        <span class="small text-body-secondary lh-sm mt-1 clamp-2">{{ k.meanings | first }}</span>
+        <span class="small text-body-secondary text-nowrap" lang="ja">
+          {%- if k.onyomi.size > 0 -%}{{ k.onyomi[0].kana }}
+          {%- elsif k.kunyomi.size > 0 -%}{{ k.kunyomi[0].kana }}
+          {%- endif -%}
+        </span>
+      </a>
+    {%- endfor %}
+  </div>
+
+  {%- if level.totals.jepang and level.totals.kanjilibrary %}
+  <div class="alert alert-secondary mb-0">
+    <i class="fa-solid fa-circle-info me-2" aria-hidden="true"></i>
+    {%- if level.totals.jepang == level.totals.kanjilibrary %}
+      Both kanji.jepang.org and kanjilibrary.com put <strong>{{ level.totals.jepang }}</strong>
+      kanji at this level.
+    {%- else %}
+      The full list for this level is <strong>{{ level.totals.jepang }}</strong> kanji according to
+      kanji.jepang.org and <strong>{{ level.totals.kanjilibrary }}</strong> according to
+      kanjilibrary.com. They differ by omission rather than disagreement — see
+      <a href="{{ '/about/sources/' | relative_url }}">Sources</a>.
+    {%- endif %}
+  </div>
+  {%- endif %}
+
+</div>

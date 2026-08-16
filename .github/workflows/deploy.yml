@@ -1,0 +1,74 @@
+name: Build and deploy
+
+# Built here rather than by GitHub Pages' classic Jekyll build, which pins
+# Jekyll 3.9 and an allowlist of plugins. This runs the same Jekyll 4 as local.
+#
+# One-time setup: repository Settings -> Pages -> Source must be "GitHub Actions",
+# or the deploy job fails on its first run.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish; queue at most one more.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Check the generated content is in step with the source data
+        # Only possible when the MkDocs project is checked out alongside; on CI
+        # it is not, so this is a no-op that documents the local command.
+        run: |
+          echo "Generated content is committed. To refresh it locally:"
+          echo "  python scripts/sync_from_mkdocs.py"
+
+      - name: Build
+        # baseurl/url come from _config.yml; configure-pages sets them too, and
+        # the two must agree or every asset 404s.
+        run: bundle exec jekyll build --trace
+        env:
+          JEKYLL_ENV: production
+
+      - name: Verify every internal link resolves
+        run: python scripts/check_links.py
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,70 @@
+# ---------------------------------------------------------------------------
+# JLPT Kanji - Jekyll + Bootstrap
+#
+# Built by GitHub Actions (see .github/workflows/deploy.yml), NOT by GitHub
+# Pages' classic build, so this runs current Jekyll and may use any gem.
+# ---------------------------------------------------------------------------
+
+title: JLPT Kanji
+tagline: Every JLPT kanji, N5 to N1
+description: >-
+  All 2,284 JLPT kanji from N5 to N1, with meanings, on'yomi and kun'yomi,
+  numbered stroke-order diagrams, common vocabulary and example sentences.
+author: Vakho Laluashvili
+lang: en
+
+# >>> CHANGE THESE TWO WHEN YOU CREATE THE GITHUB REPO <<<
+#
+# This is a *project* site, so it is served from a subpath named after the
+# repository: https://<user>.github.io/<repo>/. `baseurl` must be that subpath
+# with a leading slash and no trailing slash, or every link and asset 404s.
+# The MkDocs site already occupies the `JLPT` repo, so this one needs its own
+# name - change both lines to match whatever you call it.
+url: https://vakho10.github.io
+baseurl: /JLPT-Jekyll
+
+repository: vakho10/JLPT-Jekyll
+mkdocs_site_url: https://vakho10.github.io/JLPT/
+
+# --- build -----------------------------------------------------------------
+
+encoding: UTF-8
+markdown: kramdown
+highlighter: rouge
+timezone: Etc/UTC
+
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+collections:
+  kanji:
+    output: true
+    # Each document sets its own permalink (/n2/kanji/税/) in front matter, so
+    # URLs carry the character rather than its codepoint filename.
+
+defaults:
+  - scope: { path: "", type: "kanji" }
+    values:
+      layout: kanji
+  - scope: { path: "" }
+    values:
+      layout: page
+
+sass:
+  style: compressed
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - scripts/
+  - README.md
+  - vendor/
+  - .github/
+
+# Generated content is committed, so nothing here needs the MkDocs project at
+# build time. Regenerate with: python scripts/sync_from_mkdocs.py

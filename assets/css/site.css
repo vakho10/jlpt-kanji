@@ -1,0 +1,154 @@
+/* ---------------------------------------------------------------------------
+   JLPT Kanji - the little that Bootstrap cannot express as a utility class.
+   Everything else in this site is built from Bootstrap's own classes.
+
+   Three things earn a place here:
+     1. CJK font stacks       - no utility exists, and the glyphs need them
+     2. inline SVG internals  - utilities cannot reach inside the stroke diagram
+     3. two-line clamping     - no utility exists, and 1,249 cards need it
+   --------------------------------------------------------------------------- */
+
+:root {
+  /* Japanese falls back to whatever the reader's OS ships, which avoids pulling
+     a multi-megabyte CJK webfont. Mincho (serif) for display glyphs, Gothic for
+     running text. */
+  --jp-serif: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "MS PMincho",
+    "Noto Serif JP", "Songti SC", serif;
+  --jp-sans: "Hiragino Sans", "Yu Gothic", "YuGothic", "Meiryo",
+    "Noto Sans JP", sans-serif;
+}
+
+:lang(ja) {
+  font-family: var(--jp-sans);
+  /* Proportional kana spacing makes short Japanese strings look ragged next to
+     Latin text; keep the monospaced advance widths. */
+  font-feature-settings: "palt" 0;
+}
+
+.jp-serif,
+:lang(ja).jp-serif {
+  font-family: var(--jp-serif);
+}
+
+/* --- stroke-order diagram -------------------------------------------------
+   The SVG is inlined so its strokes can inherit the page's colour. Utility
+   classes cannot style elements inside it. */
+
+.stroke-diagram svg {
+  display: block;
+  width: 100%;
+  max-width: 15rem;
+  height: auto;
+  margin-inline: auto;
+}
+
+.stroke-diagram svg path {
+  stroke: var(--bs-emphasis-color);
+  stroke-width: 3;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* KanjiVG's own numbering group. Bootstrap's default primary, with the page
+   background as a halo so a number sitting on a stroke stays legible. */
+.stroke-diagram .stroke-numbers text {
+  font-family: var(--bs-body-font-family);
+  font-size: 8px;
+  font-weight: 700;
+  fill: var(--bs-primary);
+  stroke: var(--bs-body-bg);
+  stroke-width: 2;
+  paint-order: stroke fill;
+}
+
+/* --- kanji grid -----------------------------------------------------------
+   Bootstrap's row-cols utilities stop at 6 columns ($grid-row-columns: 6), and
+   the level pages need far more: N1's 1,249 cards are 209 rows and 29 screens
+   at 6 across, against 125 rows and 18.5 screens at 10. auto-fill also adapts
+   continuously instead of stepping at breakpoints. */
+
+.kanji-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+  gap: 0.5rem;
+}
+
+@media (max-width: 575.98px) {
+  .kanji-grid {
+    grid-template-columns: repeat(auto-fill, minmax(4.75rem, 1fr));
+    gap: 0.4rem;
+  }
+}
+
+/* --- visited kanji --------------------------------------------------------
+   Bootstrap has no :visited utility - the framework contains no :visited rule
+   at all - so this is hand-written, and it is deliberately only a recolour.
+
+   Browsers restrict :visited to a short list of colour properties (color,
+   background-color, border/outline colour, SVG fill and stroke) so that a page
+   cannot read a reader's history back out. An icon, a badge, an opacity change
+   or a checkmark are all impossible here; a tint is the whole vocabulary.
+
+   The same protection means getComputedStyle() reports the *unvisited* style
+   whatever the real state is, so unlike everything else in this file this rule
+   cannot be confirmed by measuring the rendered page.
+
+   Specificity is (0,1,1): above .card's own background (0,1,0) so the tint
+   lands, below .card-hover:hover (0,2,0) so hovering a visited card still
+   shows the hover border. Hover sets no background, so the tint stays. */
+
+.kanji-grid a:visited {
+  background-color: var(--bs-success-bg-subtle);
+  border-color: var(--bs-success-border-subtle);
+}
+
+/* --- card hover -----------------------------------------------------------
+   Bootstrap gives cards no hover state, so a clickable card looks identical to
+   a static one. One shared rule covers the level cards on the home page and the
+   2,284 kanji cards on a level page.
+
+   :focus-within as well as :focus-visible, because the home page's level card
+   is a <div> whose link is a .stretched-link - the card itself never takes
+   focus, so a keyboard user would otherwise get no feedback at all. */
+
+.card-hover {
+  transition:
+    transform 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out,
+    border-color 0.15s ease-in-out;
+}
+
+.card-hover:hover,
+.card-hover:focus-visible,
+.card-hover:focus-within {
+  transform: translateY(-2px);
+  border-color: var(--bs-primary);
+  /* !important only to outrank Bootstrap's .shadow-sm utility, which is itself
+     !important and would otherwise pin the resting shadow through the hover. */
+  box-shadow: var(--bs-box-shadow) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-hover {
+    transition: none;
+  }
+
+  .card-hover:hover,
+  .card-hover:focus-visible,
+  .card-hover:focus-within {
+    transform: none;
+  }
+}
+
+/* --- two-line clamp -------------------------------------------------------
+   Bootstrap has no line-clamp utility. Without it one wordy gloss makes its
+   whole row taller than the rest, which is very visible across 1,249 cards. */
+
+.clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
