@@ -2,10 +2,10 @@
  *
  * Deliberately not lunr. Lunr tokenises on whitespace, which Japanese does not
  * have, so it needs the lunr-languages Japanese tokeniser and a full inverted
- * index to work at all - that is what made the MkDocs site's index 5.3 MB. The
- * fields worth searching here are all short and enumerable (a character, a few
- * meanings, a handful of readings and words), so a direct scored match over a
- * compact JSON array is smaller, faster and handles CJK correctly.
+ * index to work at all, which runs to several megabytes. The fields worth
+ * searching here are all short and enumerable (a character, a few meanings, a
+ * handful of readings and words), so a direct scored match over a compact JSON
+ * array is smaller, faster and handles CJK correctly.
  *
  * The index is fetched on first use, not on page load.
  */
@@ -245,7 +245,7 @@
         }
     });
 
-    // "/" opens search from anywhere, the way the MkDocs site did.
+    // "/" opens search from anywhere, as documentation sites conventionally do.
     document.addEventListener('keydown', function (e) {
         var tag = (e.target.tagName || '').toLowerCase();
         if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) return;

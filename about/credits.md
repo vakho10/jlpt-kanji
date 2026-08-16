@@ -30,10 +30,10 @@ Stroke paths come from [**KanjiVG**](https://github.com/KanjiVG/kanjivg) by Ulri
 Apel and contributors, used under the
 [Creative Commons Attribution-ShareAlike 3.0 licence](https://creativecommons.org/licenses/by-sa/3.0/).
 
-The SVGs are vendored into this repository under `data/stroke/` so the site builds
-offline. At build time they are recoloured to follow the page's theme and stripped
-of metadata that is not rendered; the stroke paths and KanjiVG's own stroke
-numbering are unmodified.
+Each diagram is inlined into its kanji's page in this repository, so the site
+builds offline and needs no request for the drawing. The SVGs are stripped of
+metadata that is not rendered and recoloured to follow the page; the stroke paths
+and KanjiVG's own stroke numbering are unmodified.
 
 ## Level lists
 
@@ -44,9 +44,11 @@ project or with the JLPT. See [Sources]({{ '/about/sources/' | relative_url }}) 
 
 ## Software
 
-Built with [MkDocs](https://www.mkdocs.org/) and the
-[Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) theme. Every
-page under a level is generated from the YAML in `data/kanji/` at build time.
+Built with [Jekyll](https://jekyllrb.com/) and hand-written
+[Bootstrap](https://getbootstrap.com/) templates, with icons from
+[Font Awesome Free](https://fontawesome.com/) — icons CC BY 4.0, fonts SIL OFL
+1.1, code MIT. Both libraries are vendored into this repository rather than
+loaded from a CDN, so the site has no third-party runtime dependency.
 
 ## Not affiliated with the JLPT
 

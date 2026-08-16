@@ -1,8 +1,8 @@
 """Verify every internal link and asset reference in the built site resolves.
 
-Jekyll has no equivalent of `mkdocs build --strict`, so a mistyped permalink or
-a renamed page ships silently. This walks _site/, resolves every internal href
-and src against the output tree, and fails if anything is missing.
+Jekyll has no strict mode, so a mistyped permalink or a renamed page ships
+silently. This walks _site/, resolves every internal href and src against the
+output tree, and fails if anything is missing.
 
     python scripts/check_links.py            # after `bundle exec jekyll build`
     python scripts/check_links.py --site _site --base /jlpt-kanji

@@ -42,9 +42,10 @@ committed**. They are the site's own copy of the data; neither a local build nor
 CI needs anything else. Everything else — layouts, includes, styles, prose pages
 — is hand-written and safe to edit.
 
-[`scripts/sync_from_mkdocs.py`](scripts/sync_from_mkdocs.py) produced them from a
-companion MkDocs project that is no longer checked out here. It is kept for the
-day that source data resurfaces; `--source` is required and has no default.
+[`scripts/sync_kanji_data.py`](scripts/sync_kanji_data.py) is what produced them,
+from a directory of per-character YAML plus the KanjiVG stroke SVGs. That source
+is no longer available, so the script cannot be run today — it is kept as the
+record of how the generated files are structured and how they were built.
 
 ## Commands
 
@@ -53,8 +54,7 @@ day that source data resurfaces; `--source` is required and has no default.
 | `bundle exec jekyll serve`                           | Live-reloading dev server                                      |
 | `bundle exec jekyll build`                           | Build into `_site/`                                            |
 | `python scripts/check_links.py`                      | Verify every internal link resolves — Jekyll has no `--strict` |
-| `python scripts/sync_from_mkdocs.py --source <path>` | Regenerate content (add `--check` to fail when stale)          |
-| `python scripts/port_about_pages.py`                 | One-off: re-import the About pages                             |
+| `python scripts/sync_kanji_data.py --source <path>`  | Regenerate content (add `--check` to fail when stale)          |
 
 ## Deployment
 

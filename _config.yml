@@ -21,7 +21,6 @@ url: https://vakho10.github.io
 baseurl: /jlpt-kanji
 
 repository: vakho10/jlpt-kanji
-mkdocs_site_url: https://vakho10.github.io/jlpt-kanji/
 
 # --- build -----------------------------------------------------------------
 
@@ -63,6 +62,6 @@ exclude:
   - vendor/
   - .github/
 
-# Generated content is committed, so nothing here needs the MkDocs project at
-# build time. Regenerate with:
-#   python scripts/sync_from_mkdocs.py --source <path to the MkDocs project>
+# _kanji/, _data/levels.yml and assets/search-index.json are generated and
+# committed, so a build needs nothing beyond this repository. See
+# scripts/sync_kanji_data.py for how they were produced.
