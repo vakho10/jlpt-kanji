@@ -62,6 +62,6 @@ exclude:
   - vendor/
   - .github/
 
-# _kanji/, _data/levels.yml and assets/search-index.json are generated and
-# committed, so a build needs nothing beyond this repository. See
-# scripts/sync_kanji_data.py for how they were produced.
+# _kanji/, _data/levels.yml and assets/search-index.json began as generated
+# files. The source they came from no longer exists, so they are the only copy
+# and are maintained by hand. A build needs nothing beyond this repository.

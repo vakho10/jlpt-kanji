@@ -35,26 +35,28 @@ repository: vakho10/jlpt-kanji
 Nothing else hardcodes the prefix — internal links go through `relative_url` and
 the search index stores baseurl-free paths — so a rename touches only this file.
 
-## Generated vs hand-written
+## The kanji content
 
-`_kanji/`, `_data/levels.yml` and `assets/search-index.json` are **generated and
-committed**. They are the site's own copy of the data; neither a local build nor
-CI needs anything else. Everything else — layouts, includes, styles, prose pages
-— is hand-written and safe to edit.
+`_kanji/` (one document per character, with its stroke diagram inlined),
+`_data/levels.yml` and `assets/search-index.json` began as generated files, built
+from a directory of per-character YAML plus the KanjiVG stroke SVGs. **That
+source no longer exists, so these are now the only copy and are maintained by
+hand.** Treat them as source, and keep three things in step when editing:
 
-[`scripts/sync_kanji_data.py`](scripts/sync_kanji_data.py) is what produced them,
-from a directory of per-character YAML plus the KanjiVG stroke SVGs. That source
-is no longer available, so the script cannot be run today — it is kept as the
-record of how the generated files are structured and how they were built.
+- a kanji's `level_id` and its `permalink` prefix,
+- `count` in `_data/levels.yml` and the number of documents at that level,
+- an entry in `assets/search-index.json` for every kanji, with baseurl-free `u`.
+
+Everything else — layouts, includes, styles, prose pages — is hand-written and
+safe to edit freely.
 
 ## Commands
 
-| Command                                              | What it does                                                   |
-|------------------------------------------------------|----------------------------------------------------------------|
-| `bundle exec jekyll serve`                           | Live-reloading dev server                                      |
-| `bundle exec jekyll build`                           | Build into `_site/`                                            |
-| `python scripts/check_links.py`                      | Verify every internal link resolves — Jekyll has no `--strict` |
-| `python scripts/sync_kanji_data.py --source <path>`  | Regenerate content (add `--check` to fail when stale)          |
+| Command                         | What it does                                                   |
+|---------------------------------|----------------------------------------------------------------|
+| `bundle exec jekyll serve`      | Live-reloading dev server                                      |
+| `bundle exec jekyll build`      | Build into `_site/`                                            |
+| `python scripts/check_links.py` | Verify every internal link resolves — Jekyll has no strict mode |
 
 ## Deployment
 
