@@ -41,13 +41,6 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
 
-      - name: Check the generated content is in step with the source data
-        # Only possible when the MkDocs project is checked out alongside; on CI
-        # it is not, so this is a no-op that documents the local command.
-        run: |
-          echo "Generated content is committed. To refresh it locally:"
-          echo "  python scripts/sync_from_mkdocs.py"
-
       - name: Build
         # baseurl/url come from _config.yml; configure-pages sets them too, and
         # the two must agree or every asset 404s.

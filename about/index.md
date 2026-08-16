@@ -43,11 +43,11 @@ and example sentences using that vocabulary.
 
 ## How the site is built
 
-The kanji data lives as one YAML file per character in a companion
-[MkDocs project]({{ site.mkdocs_site_url }}), which remains the single source of
-truth. `scripts/sync_from_mkdocs.py` turns that data into the collection
-documents and the search index this site is built from, so both sites describe
-exactly the same 2,284 kanji.
+The kanji data began as one YAML file per character in a companion
+[MkDocs project]({{ site.mkdocs_site_url }}). `scripts/sync_from_mkdocs.py`
+turned that data into the collection documents and the search index this site is
+built from; both are committed here, so this site now builds on its own and
+describes all 2,284 kanji without needing anything else.
 
 This site is Jekyll with hand-written [Bootstrap](https://getbootstrap.com/)
 templates, which is what makes its styling fully controllable, and it is built

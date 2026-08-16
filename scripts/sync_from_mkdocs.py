@@ -1,12 +1,16 @@
 """Generate this Jekyll site's content from the MkDocs project's kanji data.
 
-The two sites live in separate repositories, so GitHub Actions cannot reach the
-MkDocs data at build time. This script vendors it in: run it locally whenever
-the kanji data changes, then commit what it writes.
+The MkDocs project is no longer checked out beside this one, and this repository
+carries the generated output rather than the source data, so nothing here needs
+it to build. The script is kept for the day the source data resurfaces and the
+generated content has to be rebuilt from it.
 
-    python scripts/sync_from_mkdocs.py
-    python scripts/sync_from_mkdocs.py --source ../MKDocs
-    python scripts/sync_from_mkdocs.py --check      # fail if anything is stale
+`--source` is therefore required and has no default: it used to default to
+`../MKDocs`, which silently became wrong when that project moved, and a default
+pointing at a path that does not exist is worse than no default at all.
+
+    python scripts/sync_from_mkdocs.py --source <path to the MkDocs project>
+    python scripts/sync_from_mkdocs.py --source <path> --check   # fail if stale
 
 It writes, all of which are committed:
 
@@ -213,8 +217,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--source",
-        default=str(ROOT.parent / "MKDocs"),
-        help="path to the MkDocs project (default: ../MKDocs)",
+        required=True,
+        help="path to the MkDocs project (the directory holding data/kanji/)",
     )
     parser.add_argument(
         "--check",
@@ -318,7 +322,7 @@ def main() -> int:
                 print(f"  {name}")
             if len(stale) > 20:
                 print(f"  ... and {len(stale) - 20} more")
-            print("\nRun: python scripts/sync_from_mkdocs.py")
+            print(f"\nRun: python scripts/sync_from_mkdocs.py --source {args.source}")
             return 1
         print(f"up to date: {total} kanji")
         return 0

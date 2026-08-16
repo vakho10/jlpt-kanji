@@ -21,7 +21,7 @@ url: https://vakho10.github.io
 baseurl: /jlpt-kanji
 
 repository: vakho10/jlpt-kanji
-mkdocs_site_url: https://vakho10.github.io/JLPT/
+mkdocs_site_url: https://vakho10.github.io/jlpt-kanji/
 
 # --- build -----------------------------------------------------------------
 
@@ -64,4 +64,5 @@ exclude:
   - .github/
 
 # Generated content is committed, so nothing here needs the MkDocs project at
-# build time. Regenerate with: python scripts/sync_from_mkdocs.py
+# build time. Regenerate with:
+#   python scripts/sync_from_mkdocs.py --source <path to the MkDocs project>

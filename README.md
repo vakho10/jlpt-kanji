@@ -10,8 +10,9 @@ All **2,284** kanji are covered:
 |---:|----:|----:|----:|------:|------:|
 | 79 | 167 | 416 | 373 | 1,249 | 2,284 |
 
-This is a sibling of the [MkDocs project](../MKDocs), which holds the kanji data
-and remains the single source of truth. Both sites describe the same characters.
+The kanji data was generated from a companion MkDocs project, which is no longer
+checked out beside this one. This repository carries the generated output, so it
+builds on its own.
 
 ## Quick start
 
@@ -43,12 +44,17 @@ is the only place that needs changing.
 ## Where the content comes from
 
 `_kanji/`, `_data/levels.yml` and `assets/search-index.json` are **generated**
-and committed. The two projects are separate repositories, so GitHub Actions
-cannot reach the MkDocs data at build time — it has to be vendored in.
+and committed. They are the site's own copy of the data: nothing needs the
+MkDocs project at build time, locally or in CI.
+
+[`scripts/sync_from_mkdocs.py`](scripts/sync_from_mkdocs.py) is what produced
+them, kept for the day that source data resurfaces. It needs to be told where
+the MkDocs project is — `--source` is required and has no default, because the
+old `../MKDocs` default silently stopped being true when that project moved:
 
 ```bash
-python scripts/sync_from_mkdocs.py            # refresh from ../MKDocs
-python scripts/sync_from_mkdocs.py --check    # non-zero if anything is stale
+python scripts/sync_from_mkdocs.py --source <path>            # regenerate
+python scripts/sync_from_mkdocs.py --source <path> --check    # non-zero if stale
 ```
 
 Everything else — layouts, includes, styles, the prose pages — is hand-written
@@ -92,7 +98,7 @@ Hiragana and katakana are folded together, and Hepburn macrons are folded so
 | `bundle exec jekyll serve`           | Live-reloading dev server                                      |
 | `bundle exec jekyll build`           | Build into `_site/` (~15s for 2,290 pages)                     |
 | `python scripts/check_links.py`      | Verify every internal link resolves — Jekyll has no `--strict` |
-| `python scripts/sync_from_mkdocs.py` | Regenerate content from the MkDocs data                        |
+| `python scripts/sync_from_mkdocs.py --source <path>` | Regenerate content from the MkDocs data       |
 | `python scripts/port_about_pages.py` | One-off: re-import the About pages                             |
 
 ## Deployment
