@@ -86,12 +86,15 @@ Group](https://www.edrdg.org/) and used under a Creative Commons licence.
 
 ## Example sentences
 
-Sentences come from the **Tanaka corpus**, the Japanese–English sentence-pair
+Most sentences come from the **Tanaka corpus**, the Japanese–English sentence-pair
 collection distributed by the EDRDG and maintained today as part of
 [Tatoeba](https://tatoeba.org/). For each kanji the site picks the shortest
 sentence that uses one of its listed words and contains no kanji from a *harder*
 level than the one being studied — so an N5 example will not quietly lean on an
 N1 character.
+
+The corpus does not cover every word, so where one of a kanji's listed words has
+no example in it, a sentence is written for this site under the same rule.
 
 <div class="alert alert-secondary" markdown="1">
 **What that does and does not guarantee**
