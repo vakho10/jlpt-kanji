@@ -78,24 +78,31 @@ layout: default
                 {%- for group in groups -%}
                 {%- if group == "onyomi" -%}
                 {%- assign entries = page.onyomi -%}
-                {%- assign heading = "On'yomi" -%}
+                {%- assign heading = "音読み" -%}
+                {%- assign heading_romanji = "On'yomi" -%}
                 {%- assign hint = "Borrowed from Chinese. Written in katakana. Dominant inside compounds." -%}
                 {%- else -%}
                 {%- assign entries = page.kunyomi -%}
-                {%- assign heading = "Kun'yomi" -%}
+                {%- assign heading = "訓読み" -%}
+                {%- assign heading_romanji = "Kun'yomi" -%}
                 {%- assign hint = "Native Japanese. Written in hiragana. Usual when the kanji stands alone." -%}
                 {%- endif -%}
                 <div class="col-12 col-md-6">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h3 class="card-title h6">{{ heading }}</h3>
-                            <p class="card-text text-body-secondary">{{ hint }}</p>
+                            <h3 class="card-title h6">
+                                <a href="#" class="text-body text-decoration-none" data-bs-toggle="tooltip"
+                                   data-bs-title="{{ heading_romanji }}">
+                                    {{ heading }}
+                                </a>
+                            </h3>
+                            <p class="card-text small text-body-secondary">{{ hint }}</p>
                             {%- if entries and entries.size > 0 %}
                             <ul class="list-unstyled d-flex flex-wrap gap-2 mb-0">
                                 {%- for r in entries %}
                                 <li class="border rounded-pill px-3 py-1{% if r.rare %} text-body-secondary{% endif %}">
                                     <span lang="ja">{{ r.kana }}</span>
-                                    <span class="text-body-secondary">{{ r.romaji }}</span>
+                                    <span class="small text-body-secondary">{{ r.romaji }}</span>
                                     {%- if r.rare %} <span class="badge text-bg-secondary">rare</span>{% endif %}
                                 </li>
                                 {%- endfor %}
