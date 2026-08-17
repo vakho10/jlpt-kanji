@@ -52,11 +52,19 @@ safe to edit freely.
 
 ## Commands
 
-| Command                         | What it does                                                   |
-|---------------------------------|----------------------------------------------------------------|
-| `bundle exec jekyll serve`      | Live-reloading dev server                                      |
-| `bundle exec jekyll build`      | Build into `_site/`                                            |
-| `python scripts/check_links.py` | Verify every internal link resolves — Jekyll has no strict mode |
+| Command                             | What it does                                                    |
+|-------------------------------------|-----------------------------------------------------------------|
+| `bundle exec jekyll serve`          | Live-reloading dev server                                       |
+| `bundle exec jekyll build`          | Build into `_site/`                                             |
+| `python scripts/check_links.py`     | Verify every internal link resolves — Jekyll has no strict mode |
+| `python scripts/check_sentences.py` | Check the example sentences (`--strict` also enforces the level rule) |
+
+Both checks run in CI. `check_sentences.py` guards the hand-maintained content
+in `_kanji/`: it fails on a sentence tagged with a word that is not in its page's
+word list, one that does not contain the word it claims, a reading with kanji in
+it, romaji with Japanese script, or a missing translation. It also reports two
+backlogs without failing — words with no sentence yet, and sentences using a
+kanji harder than their own level.
 
 ## Deployment
 

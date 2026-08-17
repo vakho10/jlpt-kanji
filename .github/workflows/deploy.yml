@@ -37,6 +37,17 @@ jobs:
         with:
           python-version: "3.13"
 
+      # check_sentences.py reads the collection's YAML front matter; check_links.py
+      # is stdlib only.
+      - name: Install Python dependencies
+        run: pip install pyyaml
+
+      # Runs before the build: _kanji/ is hand-maintained source, and a sentence
+      # tagged with the wrong word is worth catching before 2,284 pages are
+      # rendered from it.
+      - name: Check the example sentences
+        run: python scripts/check_sentences.py
+
       - name: Configure Pages
         id: pages
         uses: actions/configure-pages@v5
