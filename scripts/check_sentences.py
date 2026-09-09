@@ -46,10 +46,27 @@ JAPANESE = re.compile(r"[぀-ゟ゠-ヿ一-鿿]")
 
 
 def load() -> dict[str, dict]:
-    docs = {}
+    """Parse every document's front matter.
+
+    A hand-edit that breaks the YAML should say so and name the file, not end
+    in a parser traceback. The usual cause is a value starting with a
+    character YAML treats as syntax - a quote, a bracket, a `%` - which has to
+    be quoted to stay a plain string.
+    """
+    docs, broken = {}, []
     for path in sorted(KANJI_DIR.glob("*.html")):
         head = path.read_text(encoding="utf-8").split("---")[1]
-        docs[path.name] = yaml.safe_load(head)
+        try:
+            docs[path.name] = yaml.safe_load(head)
+        except yaml.YAMLError as err:
+            where = getattr(err, "problem_mark", None)
+            line = f" line {where.line + 1}" if where else ""
+            broken.append(f"_kanji/{path.name}{line}: {getattr(err, 'problem', err)}")
+    if broken:
+        print(f"front matter does not parse in {len(broken)} file(s):", file=sys.stderr)
+        for item in broken:
+            print(f"    {item}", file=sys.stderr)
+        raise SystemExit(1)
     return docs
 
 
